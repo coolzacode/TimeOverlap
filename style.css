@@ -47,6 +47,7 @@ body {
     width: 150px;
     padding: 0.5rem 1rem;
     border-radius: 8px;
+    border: none;
     font-weight: bold;
     font-size: 1rem;
     letter-spacing: 1px;
@@ -60,6 +61,7 @@ body {
 
 /* HEADER */
 .header {
+    background-color: var(--secondary-site-bg);
     display: flex;
     padding: 1rem;
     font-size: 1.2rem;
@@ -69,4 +71,14 @@ body {
 
 .header-btn {
     font-size: 1.5rem;
+}
+
+/* MAIN */
+.main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 4rem;
+    gap: 2rem;
 }
