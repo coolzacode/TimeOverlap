@@ -4,10 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TimeOverlap</title>
-    <link rel="stylesheet" href="style.css"></link>
+    <link rel="stylesheet" href="style.css">
     <script src="app.js" defer></script>
 </head>
 <body>
-    
+    <header>
+        <h1>TimeOverlap</h1>
+        <button id="add-member-btn" class="btn" aria-label="Add Team Member">+</button>
+    </header>
+
+    <main class="main">
+        <section class="data">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Location</th>
+                        <th>Current Time</th>
+                        <th>Working Hours</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="member-table-body">
+                </tbody>
+            </table>
+        </section>
+
+        <section class="time-slider">
+            <label for="time">Adjust Time:</label>
+            <input type="range" id="time">
+        </section>
+    </main>
+
+    <dialog id="member-modal">
+        <form method="dialog" id="member-form">
+            <h2>Add Team Member</h2>
+
+            <label for="name">Name:</label>
+            <input type="text" id="name" required>
+
+            <label for="timezone">Timezone Offset (UTC):</label>
+            <input type="number" id="timezone" min="-12" max="14" step="0.5" required>
+
+            <label for="start-time">Work Start (0-23):</label>
+            <input type="number" id="start-time" min="0" max="23" required>
+
+            <label for="end-time">Work End (0-23):</label>
+            <input type="number" id="end-time" min="0" max="23" required>
+
+            <div class="form-actions">
+                <button class="btn" type="button" id="cancel-btn">Cancel</button>
+                <button class="btn" type="submit">Add Member</button>
+            </div>
+        </form>
+    </dialog>
 </body>
 </html>
