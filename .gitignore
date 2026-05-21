@@ -1,0 +1,19 @@
+# --- macOS System Files ---
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Files that might be created in the root of a FAT file system
+.Spotlight-V100
+.Trashes
+
+# --- IDEs and Editors ---
+.vscode/
+
+# If you use Node.js
+node_modules/
+npm-debug.log*
+
+# --- Security/Privacy ---
+.env
