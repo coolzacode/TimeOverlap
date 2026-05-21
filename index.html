@@ -15,7 +15,7 @@
 
     <main class="main">
         <div class="grid-wrapper">
-            <section class="grid" role="table" aria-label="Team Schedule">
+            <section id="grid" class="grid" role="table" aria-label="Team Schedule">
                 <div class="header-row grid-header" role="row">
                     <p role="columnheader">Name</p>
                     <p role="columnheader">Location</p>
@@ -64,22 +64,27 @@
             
             <div class="form-group">
                 <label for="name">Full Name</label>
-                <input type="text" id="name" required>
+                <input name="name" type="text" id="name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="location">Location</label>
+                <input name="location" type="text" id="location" required>
             </div>
 
             <div class="form-group">
                 <label for="timezone">Timezone Offset (UTC):</label>
-                <input type="number" id="timezone" min="-12" max="14" step="0.5" value="0" required>
+                <input name="timezone-offset" type="number" id="timezone" min="-12" max="14" step="0.5" value="0" required>
             </div>
 
             <div class="form-row">
                 <div class="form-group">
                     <label for="start-time">Work Start (0-23):</label>
-                    <input type="number" id="start-time" min="0" max="23" value="9" required>
+                    <input name="start-time" type="number" id="start-time" min="0" max="23" value="9" required>
                 </div>
                 <div class="form-group">
                     <label for="end-time">Work End (0-23):</label>
-                    <input type="number" id="end-time" min="0" max="23" value="17" required>
+                    <input name="end-time" type="number" id="end-time" min="0" max="23" value="17" required>
                 </div>
             </div>
 
