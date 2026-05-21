@@ -1,0 +1,29 @@
+/* VARIABLES */
+:root {
+    /* light mode colors */
+    --primary-site-bg: #F8FAFC;
+    --secondary-site-bg: #FFFFFF;
+    --primary-text: #1E293B;
+    --secondary-text: #64748B;
+    --btn-bg: #6366F1;
+    --btn-text: #FFFFFF;
+    --border: #E2E8F0;
+
+    /* shared (light+dark) mode colors */
+    --golden-hr: #F59E0B;
+    --working-status-on: #10B981;
+    --working-status-off: #94A3B8;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        /* dark mode colors */
+        --primary-site-bg: #0F172A;
+        --secondary-site-bg: #1E293B;
+        --primary-text: #F1F5F9;
+        --secondary-text: #94A3B8;
+        --btn-bg: #818CF8;
+        --btn-text: #FFFFFF;
+        --border: #334155;
+    }
+}
