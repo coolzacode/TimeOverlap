@@ -14,42 +14,46 @@
     </header>
 
     <main class="main">
-        <section class="grid" role="table">
-            <div class="header-row" role="row">
-                <p role="columnheader">Name</p>
-                <p role="columnheader">Location</p>
-                <p role="columnheader">1am</p>
-                <p role="columnheader">2am</p>
-                <p role="columnheader">3am</p>
-                <p role="columnheader">4am</p>
-                <p role="columnheader">5am</p>
-                <p role="columnheader">6am</p>
-                <p role="columnheader">7am</p>
-                <p role="columnheader">8am</p>
-                <p role="columnheader">9am</p>
-                <p role="columnheader">10am</p>
-                <p role="columnheader">11am</p>
-                <p role="columnheader">12pm</p>
-                <p role="columnheader">1pm</p>
-                <p role="columnheader">2pm</p>
-                <p role="columnheader">3pm</p>
-                <p role="columnheader">4pm</p>
-                <p role="columnheader">5pm</p>
-                <p role="columnheader">6pm</p>
-                <p role="columnheader">7pm</p>
-                <p role="columnheader">8pm</p>
-                <p role="columnheader">9pm</p>
-                <p role="columnheader">10pm</p>
-                <p role="columnheader">11pm</p>
-                <p role="columnheader">12am</p>
-            </div>
-            <div class="member-row" role="row">
-                <p  role="cell">Test</p>
-            </div>
-        </section>
+        <div class="grid-wrapper">
+            <section class="grid" role="table">
+                <div class="header-row grid-header" role="row">
+                    <p role="columnheader">Name</p>
+                    <p role="columnheader">Location</p>
+                    <p role="columnheader">12am</p><p role="columnheader">1am</p>
+                    <p role="columnheader">2am</p><p role="columnheader">3am</p>
+                    <p role="columnheader">4am</p><p role="columnheader">5am</p>
+                    <p role="columnheader">6am</p><p role="columnheader">7am</p>
+                    <p role="columnheader">8am</p><p role="columnheader">9am</p>
+                    <p role="columnheader">10am</p> <p role="columnheader">11am</p>
+                    <p role="columnheader">12pm</p><p role="columnheader">1pm</p>
+                    <p role="columnheader">2pm</p><p role="columnheader">3pm</p>
+                    <p role="columnheader">4pm</p><p role="columnheader">5pm</p>
+                    <p role="columnheader">6pm</p><p role="columnheader">7pm</p>
+                    <p role="columnheader">8pm</p><p role="columnheader">9pm</p>
+                    <p role="columnheader">10pm</p><p role="columnheader">11pm</p>
+                </div>
+
+                <div class="member-row" role="row">
+                    <p class="member-name" role="cell">Test User</p>
+                    <p class="member-loc" role="cell">Chicago, US</p>
+                    <p class="timeline-slot">12am</p><p class="timeline-slot">1am</p>
+                    <p class="timeline-slot">2am</p><p class="timeline-slot">3am</p>
+                    <p class="timeline-slot">4am</p><p class="timeline-slot">5am</p>
+                    <p class="timeline-slot">6am</p><p class="timeline-slot">7am</p>
+                    <p class="timeline-slot">8am</p><p class="timeline-slot">9am</p>
+                    <p class="timeline-slot">10am</p> <p class="timeline-slot">11am</p>
+                    <p class="timeline-slot">12pm</p><p class="timeline-slot">1pm</p>
+                    <p class="timeline-slot">2pm</p><p class="timeline-slot">3pm</p>
+                    <p class="timeline-slot">4pm</p><p class="timeline-slot">5pm</p>
+                    <p class="timeline-slot">6pm</p><p class="timeline-slot">7pm</p>
+                    <p class="timeline-slot">8pm</p><p class="timeline-slot">9pm</p>
+                    <p class="timeline-slot">10pm</p><p class="timeline-slot">11pm</p>
+                </div>
+            </section>
+        </div>
 
         <section class="time-slider">
-            <label for="time">Adjust Time:</label>
+            <label for="time">Adjust Time (UTC):</label>
             <input type="range" id="time">
         </section>
     </main>
