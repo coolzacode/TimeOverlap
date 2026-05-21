@@ -112,3 +112,12 @@ body {
 .grid p {
     padding: .5rem .2rem;
 }
+
+/* SLIDER */
+.time-slider {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
