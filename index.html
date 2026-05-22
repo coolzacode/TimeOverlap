@@ -73,18 +73,93 @@
             </div>
 
             <div class="form-group">
-                <label for="timezone">Timezone Offset (UTC):</label>
-                <input name="timezone-offset" type="number" id="timezone" min="-12" max="14" step="0.5" value="0" required>
+                <label for="timezone">Member's Local Timezone</label>
+                <select name="timezone" id="timezone-select" required>
+                    <option value="" disabled selected>Select a timezone...</option>
+        
+                    <option value="America/New_York">Eastern Time (ET)</option>
+                    <option value="America/Chicago">Central Time (CT)</option>
+                    <option value="America/Denver">Mountain Time (MT)</option>
+                    <option value="America/Los_Angeles">Pacific Time (PT)</option>
+                    <option value="America/Anchorage">Alaska Time (AKT)</option>
+                    <option value="Pacific/Honolulu">Hawaii-Aleutian Time (HAT)</option>
+
+                    <option value="UTC">Universal Coordinated Time (UTC)</option>
+                    <option value="Europe/London">Greenwich Mean Time (GMT / BST)</option>
+                    <option value="Europe/Paris">Central European Time (CET / CEST)</option>
+                    <option value="Europe/Istanbul">Eastern European Time (EET / TRT)</option>
+                    <option value="Africa/Johannesburg">South Africa Standard Time (SAST)</option>
+
+                    <option value="Asia/Dubai">Gulf Standard Time (GST)</option>
+                    <option value="Asia/Kolkata">India Standard Time (IST)</option>
+                    <option value="Asia/Bangkok">Indochina Time (ICT)</option>
+                    <option value="Asia/Shanghai">China Standard Time (CST)</option>
+                    <option value="Asia/Tokyo">Japan Standard Time (JST)</option>
+                    <option value="Australia/Sydney">Australian Eastern Time (AET)</option>
+                    <option value="Pacific/Auckland">New Zealand Time (NZT)</option>
+                </select>
             </div>
 
             <div class="form-row">
                 <div class="form-group">
-                    <label for="start-time">Work Start (0-23):</label>
-                    <input name="start-time" type="number" id="start-time" min="0" max="23" value="9" required>
+                    <label for="start-time">Work Start</label>
+                    <select name="start-time" id="start-time" required>
+                        <option value="" disabled selected>Select an hour</option>
+                        <option value="12am">12am</option>
+                        <option value="1am">1am</option>
+                        <option value="2am">2am</option>
+                        <option value="3am">3am</option>
+                        <option value="4am">4am</option>
+                        <option value="5am">5am</option>
+                        <option value="6am">6am</option>
+                        <option value="7am">7am</option>
+                        <option value="8am">8am</option>
+                        <option value="9am">9am</option>
+                        <option value="10am">10am</option>
+                        <option value="11am">11am</option>
+                        <option value="12pm">12pm</option>
+                        <option value="1pm">1pm</option>
+                        <option value="2pm">2pm</option>
+                        <option value="3pm">3pm</option>
+                        <option value="4pm">4pm</option>
+                        <option value="5pm">5pm</option>
+                        <option value="6pm">6pm</option>
+                        <option value="7pm">7pm</option>
+                        <option value="8pm">8pm</option>
+                        <option value="9pm">9pm</option>
+                        <option value="10pm">10pm</option>
+                        <option value="11pm">11pm</option>
+                    </select>
                 </div>
                 <div class="form-group">
-                    <label for="end-time">Work End (0-23):</label>
-                    <input name="end-time" type="number" id="end-time" min="0" max="23" value="17" required>
+                    <label for="end-time">Work End</label>
+                    <select name="end-time" id="end-time" required>
+                        <option value="" disabled selected>Select an hour</option>
+                        <option value="12am">12am</option>
+                        <option value="1am">1am</option>
+                        <option value="2am">2am</option>
+                        <option value="3am">3am</option>
+                        <option value="4am">4am</option>
+                        <option value="5am">5am</option>
+                        <option value="6am">6am</option>
+                        <option value="7am">7am</option>
+                        <option value="8am">8am</option>
+                        <option value="9am">9am</option>
+                        <option value="10am">10am</option>
+                        <option value="11am">11am</option>
+                        <option value="12pm">12pm</option>
+                        <option value="1pm">1pm</option>
+                        <option value="2pm">2pm</option>
+                        <option value="3pm">3pm</option>
+                        <option value="4pm">4pm</option>
+                        <option value="5pm">5pm</option>
+                        <option value="6pm">6pm</option>
+                        <option value="7pm">7pm</option>
+                        <option value="8pm">8pm</option>
+                        <option value="9pm">9pm</option>
+                        <option value="10pm">10pm</option>
+                        <option value="11pm">11pm</option>
+                    </select>
                 </div>
             </div>
 

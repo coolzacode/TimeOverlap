@@ -241,8 +241,7 @@ label {
     color: var(--secondary-text);
 }
 
-input[type="text"],
-input[type="number"] {
+input, select {
     padding: 0.75rem;
     border-radius: 8px;
     border: 1px solid var(--border);
