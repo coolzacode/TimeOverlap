@@ -6,7 +6,6 @@
 | :-- | 
 |![Picture of the web application in light mode.](./assets/light-mode.jpg) |
 | Dark Mode |
-| :-- | 
 |![Picture of the web application in dark mode.](./assets/dark-mode.jpg) |
 
 ## Overview
