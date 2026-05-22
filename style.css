@@ -179,10 +179,12 @@ body {
     justify-content: center;
 }
 
-.time-slider {
+/* INFO SECTION */
+
+.info {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
     gap: 1rem;
     padding: 1.5rem;
     background-color: var(--secondary-site-bg);
@@ -190,9 +192,15 @@ body {
     border: 1px solid var(--border);
 }
 
-input[type="range"] {
-    width: 300px;
-    cursor: pointer;
+.info-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.info-group p {
+    color: var(--secondary-text);
 }
 
 /* DIALOG */

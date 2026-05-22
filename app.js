@@ -6,6 +6,7 @@ const grid = document.getElementById('grid');
 
 let membersArr = []
 
+// converts am/pm string to 24-hour integers (0-23)
 function convertTimeTo24(timeStr) {
     if (!timeStr) return 0;
 
@@ -39,35 +40,18 @@ class MemberProfile {
         const timezonePart = dateTimeParts.find(part => part.type === 'timeZoneName');
         const rawOffsetString = timezonePart.value; 
 
-        if (!/[0-9]/.test(rawOffsetString)) {
-            return 0;
-        }
+        if (!/[0-9]/.test(rawOffsetString)) return 0;
 
         let cleanOffset = rawOffsetString.replace(':30', '.5').replace(':45', '.75');
         cleanOffset = cleanOffset.replace(/[A-Z]/gi, '');
 
         const decimalOffset = parseFloat(cleanOffset);
-
         return isNaN(decimalOffset) ? 0 : decimalOffset;
-    }
-
-    // gets the abbreviation of the timezone
-    getTimezoneAbbr() {
-        const abbrFormatter = new Intl.DateTimeFormat('en-US', {
-            timeZone: this.timezone,
-            timeZoneName: 'short'
-        });
-
-        const dateTimeParts = abbrFormatter.formatToParts(new Date());
-        const timezonePart = dateTimeParts.find(part => part.type === 'timeZoneName');
-
-        return timezonePart.value;
     }
 
     // converts local hours to UTC grid indices (0-23)
     getUTCWorkHours() {
         const currentOffset = this.getUTCOffset(); 
-
         const hourIndexStartUTC = (this.localStart - currentOffset + 24) % 24;
         const hourIndexEndUTC = (this.localEnd - currentOffset + 24) % 24;
 
@@ -76,8 +60,37 @@ class MemberProfile {
             endUTC: hourIndexEndUTC
         };
     }
+
+    // checks if member is working at a specific UTC hour
+    isWorkingAtHour(utcHour) {
+        const {startUTC, endUTC} = this.getUTCWorkHours();
+        if (startUTC < endUTC) {
+            return utcHour >= startUTC && utcHour < endUTC;
+        } else {
+            return utcHour >= startUTC || utcHour < endUTC;
+        }
+    }
 }
 
+// updates the Info Section with current times and active member count
+function updateAppInfo() {
+    const localTimeDisplay = document.getElementById('local-time');
+    const utcTimeDisplay = document.getElementById('utc-time');
+    const totalWorkingDisplay = document.getElementById('total-working');
+
+    if (!localTimeDisplay || !utcTimeDisplay || !totalWorkingDisplay) return;
+
+    const currTime = new Date();
+    const currentUTCHour = currTime.getUTCHours();
+
+    localTimeDisplay.textContent = currTime.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
+    utcTimeDisplay.textContent = currTime.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit', timeZone: 'UTC'});
+
+    const workingCount = membersArr.filter(member => member.isWorkingAtHour(currentUTCHour)).length;
+    totalWorkingDisplay.textContent = `${workingCount} member${workingCount === 1 ? '' : 's'}`;
+}
+
+// adds new member's info into array and calls renderGrid()
 function handleFormSubmit(e) {
     e.preventDefault(); 
     const formData = new FormData(e.target);
@@ -99,6 +112,7 @@ function handleFormSubmit(e) {
     renderGrid();
 }
 
+// display members onto the grid
 function renderGrid() {
     const existingHeader = document.querySelector('.grid-header');
     grid.replaceChildren();
@@ -123,26 +137,12 @@ function renderGrid() {
         memberRow.appendChild(memberName);
         memberRow.appendChild(memberLoc);
 
-        const {startUTC, endUTC} = member.getUTCWorkHours();
-
         for (let i = 0; i < 24; i++) {
             const timelineSlot = document.createElement('p');
             timelineSlot.className = 'timeline-slot';
             timelineSlot.role = 'cell';
 
-            let isWorking = false;
-
-            if (startUTC < endUTC) {
-                if (i >= startUTC && i < endUTC) {
-                    isWorking = true;
-                }
-            } else {
-                if (i >= startUTC || i < endUTC) {
-                    isWorking = true;
-                }
-            }
-
-            if (isWorking) {
+            if (member.isWorkingAtHour(i)) {
                 timelineSlot.classList.add('slot-highlight');
             }
 
@@ -160,3 +160,6 @@ cancelBtn.addEventListener('click', () => {
     dialog.close();
 });
 memberForm.addEventListener('submit', handleFormSubmit);
+
+setInterval(updateAppInfo, 30000); // 30 seconds
+updateAppInfo();
