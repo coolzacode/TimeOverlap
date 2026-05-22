@@ -10,7 +10,7 @@ class MemberProfile {
     constructor (name, location, timezone, localStart, localEnd) {
         this.name = name;
         this.location = location;
-        this.timezoneOffset = timezone;
+        this.timezone = timezone;
         this.localStart = Number(localStart);
         this.localEnd = Number(localEnd);
     }
@@ -75,55 +75,15 @@ function handleFormSubmit(e) {
     e.target.reset();
     dialog.close();
 
-    console.log(membersArr);
     renderGrid();
 }
 
-function addGridHeader() {
-    const fragment = document.createDocumentFragment();
-
-    const row = document.createElement('div');
-    const name = document.createElement('p');
-    const location = document.createElement('p');
-
-    row.className = 'header-row grid-header';
-    name.textContent = 'Name';
-    location.textContent = 'Location';
-
-    row.appendChild(name);
-    row.appendChild(location);
-
-    const twelveAM = document.createElement('p');
-    twelveAM.role = 'columnheader';
-    twelveAM.textContent = '12am'
-    row.appendChild(twelveAM);
-
-    for (let i = 1; i < 12; i++) {
-        const timelineSlot = document.createElement('p');
-        timelineSlot.role = 'columnheader';
-        timelineSlot.textContent = `${i}am`
-        row.appendChild(timelineSlot);
-    }
-
-    const twelvePM = document.createElement('p');
-    twelvePM.role = 'columnheader';
-    twelvePM.textContent = '12pm'
-    row.appendChild(twelvePM);
-
-    for (let i = 1; i < 12; i++) {
-        const timelineSlot = document.createElement('p');
-        timelineSlot.role = 'columnheader';
-        timelineSlot.textContent = `${i}pm`
-        row.appendChild(timelineSlot);
-    }
-
-    fragment.appendChild(row);
-    grid.appendChild(fragment);
-}
-
 function renderGrid() {
+    const existingHeader = document.querySelector('.grid-header');
     grid.replaceChildren();
-    addGridHeader();
+    if (existingHeader) {
+        grid.appendChild(existingHeader);
+    }
     const fragment = document.createDocumentFragment();
 
     for (let i = 0; i < membersArr.length; i++) {
