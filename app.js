@@ -2,6 +2,7 @@ const addMemberBtn = document.getElementById('add-member-btn');
 const cancelBtn = document.getElementById('cancel-btn');
 const dialog = document.getElementById('member-modal');
 const memberForm = document.getElementById('member-form');
+const grid = document.getElementById('grid');
 
 let membersArr = []
 
@@ -75,7 +76,82 @@ function handleFormSubmit(e) {
     dialog.close();
 
     console.log(membersArr);
+    renderGrid();
 }
+
+function addGridHeader() {
+    const fragment = document.createDocumentFragment();
+
+    const row = document.createElement('div');
+    const name = document.createElement('p');
+    const location = document.createElement('p');
+
+    row.className = 'header-row grid-header';
+    name.textContent = 'Name';
+    location.textContent = 'Location';
+
+    row.appendChild(name);
+    row.appendChild(location);
+
+    const twelveAM = document.createElement('p');
+    twelveAM.role = 'columnheader';
+    twelveAM.textContent = '12am'
+    row.appendChild(twelveAM);
+
+    for (let i = 1; i < 12; i++) {
+        const timelineSlot = document.createElement('p');
+        timelineSlot.role = 'columnheader';
+        timelineSlot.textContent = `${i}am`
+        row.appendChild(timelineSlot);
+    }
+
+    const twelvePM = document.createElement('p');
+    twelvePM.role = 'columnheader';
+    twelvePM.textContent = '12pm'
+    row.appendChild(twelvePM);
+
+    for (let i = 1; i < 12; i++) {
+        const timelineSlot = document.createElement('p');
+        timelineSlot.role = 'columnheader';
+        timelineSlot.textContent = `${i}pm`
+        row.appendChild(timelineSlot);
+    }
+
+    fragment.appendChild(row);
+    grid.appendChild(fragment);
+}
+
+function renderGrid() {
+    grid.replaceChildren();
+    addGridHeader();
+    const fragment = document.createDocumentFragment();
+
+    for (let i = 0; i < membersArr.length; i++) {
+        const memberRow = document.createElement('div');
+        const memberName = document.createElement('p');
+        const memberLoc = document.createElement('p');
+
+        memberRow.className = 'member-row';
+        memberName.className = 'member-name';
+        memberLoc.className = 'member-loc';
+
+        memberName.textContent = membersArr[i].name;
+        memberLoc.textContent = membersArr[i].location;
+        
+        memberRow.appendChild(memberName);
+        memberRow.appendChild(memberLoc);
+
+        for (let j = 0; j < 24; j++) {
+            const timelineSlot = document.createElement('p');
+            timelineSlot.className = 'timeline-slot';
+            timelineSlot.role = 'cell';
+            memberRow.appendChild(timelineSlot);
+        }
+        fragment.appendChild(memberRow);
+    }
+    grid.appendChild(fragment);
+}
+
 
 addMemberBtn.addEventListener('click', () => dialog.showModal());
 cancelBtn.addEventListener('click', () => {
