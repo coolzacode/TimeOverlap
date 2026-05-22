@@ -13,6 +13,8 @@
     --btn-secondary-text: #475569;
 
     /* shared (light+dark) mode colors */
+    --slot-highlight: #6366F1;
+    --slot-highlight-border: rgba(255, 255, 255, 0.2);
     --row-hover: rgba(99, 102, 241, 0.05);
     --golden-hr: #F59E0B;
     --working-status-on: #10B981;
@@ -133,6 +135,11 @@ body {
 
 .timeline-slot:last-child {
     border-right: 1px solid var(--border);
+}
+
+.slot-highlight {
+    background-color: var(--slot-highlight);
+    border-color: var(--slot-highlight-border);
 }
 
 /* INTERACTIVE ELEMENTS */

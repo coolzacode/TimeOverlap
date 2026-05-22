@@ -6,6 +6,19 @@ const grid = document.getElementById('grid');
 
 let membersArr = []
 
+function convertTimeTo24(timeStr) {
+    if (!timeStr) return 0;
+
+    const hour = parseInt(timeStr.replace(/(am|pm)/, ""));
+    const period = timeStr.slice(-2).toLowerCase();
+
+    if (period === "am") {
+        return hour === 12 ? 0 : hour;
+    } else {
+        return hour === 12 ? 12 : hour + 12;
+    }
+}
+
 class MemberProfile {
     constructor (name, location, timezone, localStart, localEnd) {
         this.name = name;
@@ -24,12 +37,18 @@ class MemberProfile {
 
         const dateTimeParts = offsetFormatter.formatToParts(new Date());
         const timezonePart = dateTimeParts.find(part => part.type === 'timeZoneName');
-        const rawOffsetString = timezonePart.value;
+        const rawOffsetString = timezonePart.value; 
 
-        const numericOffsetString = rawOffsetString.replace('GMT', '').replace(':', '.');
-        const decimalOffset = parseFloat(numericOffsetString);
+        if (!/[0-9]/.test(rawOffsetString)) {
+            return 0;
+        }
 
-        return decimalOffset || 0;
+        let cleanOffset = rawOffsetString.replace(':30', '.5').replace(':45', '.75');
+        cleanOffset = cleanOffset.replace(/[A-Z]/gi, '');
+
+        const decimalOffset = parseFloat(cleanOffset);
+
+        return isNaN(decimalOffset) ? 0 : decimalOffset;
     }
 
     // gets the abbreviation of the timezone
@@ -63,18 +82,20 @@ function handleFormSubmit(e) {
     e.preventDefault(); 
     const formData = new FormData(e.target);
 
+    const startTime24 = convertTimeTo24(formData.get('start-time'));
+    const endTime24 = convertTimeTo24(formData.get('end-time'));
+
     const newMember = new MemberProfile(
         formData.get('name'),
         formData.get('location'),
         formData.get('timezone'),
-        formData.get('start-time'),
-        formData.get('end-time')
+        startTime24,
+        endTime24
     );
-    membersArr.push(newMember);
 
+    membersArr.push(newMember);
     e.target.reset();
     dialog.close();
-
     renderGrid();
 }
 
@@ -84,9 +105,10 @@ function renderGrid() {
     if (existingHeader) {
         grid.appendChild(existingHeader);
     }
+
     const fragment = document.createDocumentFragment();
 
-    for (let i = 0; i < membersArr.length; i++) {
+    membersArr.forEach(member => {
         const memberRow = document.createElement('div');
         const memberName = document.createElement('p');
         const memberLoc = document.createElement('p');
@@ -95,20 +117,39 @@ function renderGrid() {
         memberName.className = 'member-name';
         memberLoc.className = 'member-loc';
 
-        memberName.textContent = membersArr[i].name;
-        memberLoc.textContent = membersArr[i].location;
+        memberName.textContent = member.name;
+        memberLoc.textContent = member.location;
         
         memberRow.appendChild(memberName);
         memberRow.appendChild(memberLoc);
 
-        for (let j = 0; j < 24; j++) {
+        const {startUTC, endUTC} = member.getUTCWorkHours();
+
+        for (let i = 0; i < 24; i++) {
             const timelineSlot = document.createElement('p');
             timelineSlot.className = 'timeline-slot';
             timelineSlot.role = 'cell';
+
+            let isWorking = false;
+
+            if (startUTC < endUTC) {
+                if (i >= startUTC && i < endUTC) {
+                    isWorking = true;
+                }
+            } else {
+                if (i >= startUTC || i < endUTC) {
+                    isWorking = true;
+                }
+            }
+
+            if (isWorking) {
+                timelineSlot.classList.add('slot-highlight');
+            }
+
             memberRow.appendChild(timelineSlot);
         }
         fragment.appendChild(memberRow);
-    }
+    });
     grid.appendChild(fragment);
 }
 
